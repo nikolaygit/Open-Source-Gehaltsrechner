@@ -1,0 +1,66 @@
+<html>
+<head>
+	<title>Open Source Gehaltsrechner</title>
+	
+	<!-- slikcalc dependancies http://slikcalc.selfcontained.us/-->
+	<script type="text/javascript" src="js/slikcalc.min.js"></script>
+	<script type="text/javascript" src="js/slikcalc.gehaltsrechner.js"></script>
+	
+	<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+		  $('#bruttogehalt').bind('focusout', function(event) {
+			lohnsteuerberechnen();
+		  });
+		  $('#bruttogehalt').bind('keydown', function(event) {
+			$('#lohnsteuerbeitrag').text("0"); // clean on changes
+		  });
+		});
+		
+		function lohnsteuerberechnen() {
+			// The PHP script uses this interface: https://www.abgabenrechner.de/interface/
+			var bruttogehaltvalue = document.getElementById('bruttogehalt').value;			
+			$.ajax({
+				type: 'GET',
+				url: "lohnsteuer.php",
+				data: "RE4=" + bruttogehaltvalue,
+				dataType: "text",
+				success: function(data){
+					$('#lohnsteuerbeitrag').text(data);
+				},
+                error:function (result) {
+					alert('Service call failed: ' + result.status + ', ' + result.statusText);
+                }
+			});
+		}
+	</script>
+
+	<style media="screen" type="text/css">
+	.number{
+		text-align:right;
+	}
+	</style>
+</head>
+<body>
+	<h1>Brutto Gehalt</h1>
+	<input type="text" id="bruttogehalt" />€
+
+	<h1>Kosten</h1>
+	<table>
+	<tr><th>Sozialversicherung</th><th>Gesamtbeitrag</th><th>Arbeitgeberbeitrag</th><th>Arbeitnehmerbeitrag</th><th>Berechnung</th><th>Erklärung</th></tr>
+	
+	<tr><td>Krankenversicherung (KV)</td><td class="number"><span id="kvbeitrag"></span>€</td><td class="number"><span id="kvbeitrag_arbeitgeber"></span>€</td><td class="number"><span id="kvbeitrag_arbeitnehmer"></span>€</td><td><span id="kvbeitragsatz">15.5</span>% * Bruttogehalt; Arbeitgeber: <span id="kvbeitragsatz_arbeitgeber">7.3</span>%, Arbeitnehmer: <span id="kvbeitragsatz_arbeitnehmer">8.2</span>%</td><td>...<td></tr>
+	
+	<tr><td>Rentenversicherung (RV)</td><td class="number"><span id="rvbeitrag"></span>€</td><td class="number"><span id="rvbeitrag_arbeitgeber"></span>€</td><td class="number"><span id="rvbeitrag_arbeitnehmer"></span>€</td><td><span id="rvbeitragsatz">19.6</span>% * Bruttogehalt; Arbeitgeber: <span id="rvbeitragsatz_arbeitgeber">9.8</span>%, Arbeitnehmer: <span id="rvbeitragsatz_arbeitnehmer">9.8</span>%</td><td>...<td></tr>
+
+	<tr><td>Arbeitslosenversicherung (ALV)</td><td class="number"><span id="alvbeitrag"></span>€</td><td class="number"><span id="alvbeitrag_arbeitgeber"></span>€</td><td class="number"><span id="alvbeitrag_arbeitnehmer"></span>€</td><td><span id="alvbeitragsatz">3</span>% * Bruttogehalt; Arbeitgeber: <span id="alvbeitragsatz_arbeitgeber">1.5</span>%, Arbeitnehmer: <span id="alvbeitragsatz_arbeitnehmer">1.5</span>%</td><td>...<td></tr>
+	
+	<tr><td>Pflegeversicherung (PV)</td><td class="number"><span id="pvbeitrag"></span>€</td><td class="number"><span id="pvbeitrag_arbeitgeber"></span>€</td><td class="number"><span id="pvbeitrag_arbeitnehmer"></span>€</td><td><span id="pvbeitragsatz">1.95</span>% * Bruttogehalt; Arbeitgeber: <span id="pvbeitragsatz_arbeitgeber">0.975</span>%, Arbeitnehmer: <span id="pvbeitragsatz_arbeitnehmer">0.975</span>%</td><td>...<td></tr>
+	
+	<tr><td>Lohnsteuer</td><td class="number"><span id="lohnsteuerbeitrag"></span>€</td><td class="number"><span id="lohnsteuerbeitrag_arbeitgeber"></span>€</td><td class="number"><span id="lohnsteuerbeitrag_arbeitnehmer"></span>€</td><td>Nutzt <a href="https://www.abgabenrechner.de/interface/">dieses Interface</a> <input type="button" value="Neuberechnen" onclick="lohnsteuerberechnen()"></td><td>...<td></tr>
+
+	</table>
+
+</body>
+</html>
