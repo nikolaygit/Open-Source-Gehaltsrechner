@@ -9,6 +9,14 @@
 		<umlagesatzU2 wert="0.27" erstattung="100" />
 	</umlagesaetze>
 </krankenkasse>
+<krankenkasse id="tk" name="Techniker Krankenkasse">
+	<umlagesaetze jahr="2012" url="http://www.tk.de/tk/jahreswechsel-2011-2012/entgeltfortzahlungsversicherung/386312">
+		<umlagesatzU1 wert="1.2" erstattung="40" />
+		<umlagesatzU1 wert="2.1" erstattung="70" />
+		<umlagesatzU1 wert="3.3" erstattung="80" />
+		<umlagesatzU2 wert="0.36" erstattung="100" />
+	</umlagesaetze>
+</krankenkasse>
 <krankenkasse id="securvita" name="SECURVITA">
 	<umlagesaetze jahr="2012" url="http://www.securvita.de/fileadmin/user_upload/PDF-Dateien/krankenkasse/AG_Umlage_A002.pdf">
 		<umlagesatzU1 wert="1.5" erstattung="50" />

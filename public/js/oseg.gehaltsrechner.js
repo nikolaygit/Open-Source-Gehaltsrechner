@@ -351,16 +351,23 @@ function updateKrankenkassename(kkXmlObj, kkName) {
 		}
 	});
 	
+	
 	// add umlagesaetze U1
 	var count = 0;
 	kkXmlObj.find('umlagesatzU1').each(function(){
 		count++;
+		if (count == 4) {
+			$('#umlagesatzU1_Choice4').css("display", "inline");
+		}
 		var umlageWert = $(this).attr("wert");
 		var umlageErstattung = $(this).attr("erstattung");
 		
 		$('#umlagesatzU1Wert_'+count).text(umlageWert);
 		$('#umlagesatzU1Erstattung_'+count).text(umlageErstattung);
 	});
+	if (count == 3) {
+		$('#umlagesatzU1_Choice4').css("display", "none");
+	}
 
 	// add umlagesaetze U2
 	kkXmlObj.find('umlagesatzU2').each(function(){
