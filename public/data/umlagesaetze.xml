@@ -17,21 +17,4 @@
 		<umlagesatzU2 wert="0.36" erstattung="100" />
 	</umlagesaetze>
 </krankenkasse>
-<krankenkasse id="test" name="test">
-	<umlagesaetze jahr="2012" url="http://www.test.de/Umlage.pdf">
-		<umlagesatzU1 wert="0.1" erstattung="50" />
-		<umlagesatzU1 wert="0.2" erstattung="60" />
-		<umlagesatzU1 wert="0.3" erstattung="80" />
-		<umlagesatzU1 wert="0.4" erstattung="90" />
-		<umlagesatzU2 wert="0.22" erstattung="100" />
-	</umlagesaetze>
-</krankenkasse>
-<krankenkasse id="22222" name="2222222">
-	<umlagesaetze jahr="2012" url="http://www.test.de/Umlage.pdf">
-		<umlagesatzU1 wert="0.75" erstattung="60" />
-		<umlagesatzU1 wert="0.8" erstattung="80" />
-		<umlagesatzU1 wert="0.9" erstattung="90" />
-		<umlagesatzU2 wert="0.99" erstattung="100" />
-	</umlagesaetze>
-</krankenkasse>
 </krankenkassen>
