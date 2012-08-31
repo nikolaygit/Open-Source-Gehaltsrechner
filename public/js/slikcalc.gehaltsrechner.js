@@ -282,7 +282,7 @@ slikcalc.gehaltsrechner = {
 			calcOnLoad: true,
             registerListeners: true,
 			vars: {
-				a: { id: 'umlagesatzU2' },
+				a: { id: 'umlagesatzU2Wert' },
 				b: { id: 'bruttogehalt'},
 				c: { id: 'umlageu2beitrag'}
 			}

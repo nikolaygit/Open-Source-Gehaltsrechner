@@ -87,6 +87,12 @@ function addBindings() {
 	$('#kirchensteuerbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_kirchensteuerbeitrag_arbeitnehmer').text($('#kirchensteuerbeitrag_arbeitnehmer').text());
 	});
+	$('#umlageu1beitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
+		$('#umlageu1beitrag_arbeitgeber').text($('#umlageu1beitrag').text());
+	});
+	$('#umlageu2beitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
+		$('#umlageu2beitrag_arbeitgeber').text($('#umlageu2beitrag').text());
+	});
 	$('#nettogehalt_berechnung').bind('DOMSubtreeModified', function(event) { // mirror the value
 		var bruttogehalt = $('#bruttogehalt').val();
 		var netto_kvbeitrag_arbeitnehmer = $('#netto_kvbeitrag_arbeitnehmer').text();
@@ -127,6 +133,9 @@ function addBindings() {
 		var selectedKinderlos = $(this).attr("value");
 		updateKinderlosdaten(selectedKinderlos);
 	});
+	$('input:radio[name=umlagesatz_u1]').change(function() {
+		selectedUmlageU1($(this));
+	});
 }
 
 function getUrlVar(key){
@@ -137,7 +146,6 @@ function getUrlVar(key){
 function lohnsteuerberechnen() {
 	
 	//$("#textoutput").text($("#textoutput").text() + "-lohnsteuerberechnen-");
-	//$('#kvbeitragsatz_arbeitnehmer').text(30);
 	
 	$('#lohnsteuerbeitrag').text("0");
 	$('#kirchensteuerbeitrag').text("0");
@@ -331,6 +339,7 @@ function updateKirchensteuerdaten(bundesLandId) {
 function updateKrankenkassename(kkXmlObj, kkName) {
 
 	//$("#textoutput").text($("#textoutput").text() + "-"+kkName+"-");
+	
 	// update names
 	$('.krankenkasse_name').each(function() {
 		var url = kkXmlObj.find('umlagesaetze').attr("url");
@@ -342,73 +351,31 @@ function updateKrankenkassename(kkXmlObj, kkName) {
 		}
 	});
 	
-	var umlageU1El = $('#krankenkasse_umlagesaetze_u1');
-	umlageU1El.empty();
+	// add umlagesaetze U1
 	var count = 0;
+	kkXmlObj.find('umlagesatzU1').each(function(){
+		count++;
+		var umlageWert = $(this).attr("wert");
+		var umlageErstattung = $(this).attr("erstattung");
+		
+		$('#umlagesatzU1Wert_'+count).text(umlageWert);
+		$('#umlagesatzU1Erstattung_'+count).text(umlageErstattung);
+	});
+
+	// add umlagesaetze U2
+	kkXmlObj.find('umlagesatzU2').each(function(){
+		var umlageWert = $(this).attr("wert");
+		var umlageErstattung = $(this).attr("erstattung");
+		
+		$('#umlagesatzU2Wert').text(umlageWert);
+		$('#umlagesatzU2Erstattung').text(umlageErstattung);
+		slikcalc.gehaltsrechner.UmlageU2FormulaCalcRows.calculate();
+	});
 	
-	var chainExecution = {   // every method returns this
-		first: function() {
-		
-			// add umlagesaetze U1
-			kkXmlObj.find('umlagesatzU1').each(function(){
-				count++;
-				var umlageWert = $(this).attr("wert");
-				var umlageErstattung = $(this).attr("erstattung");
-				
-				umlageU1El.append("<input type='checkbox' class='umlagesatzU1CheckBox' id='umlagesatzU1CheckBox_"+count+"' "+(count==1? "checked='true'":"")+"/>");
-				umlageU1El.append("<span id='umlagesatzU1Wert_"+count+"'>"+umlageWert+"</span>% ("+umlageErstattung+"% Erstattung)<br/>");
-				//$("#textoutput").text($("#textoutput").text() + "B" + count + ",");
-			});
-	
-			// add umlagesaetze U2
-			kkXmlObj.find('umlagesatzU2').each(function(){
-				var umlageWert = $(this).attr("wert");
-				var umlageErstattung = $(this).attr("erstattung");
-				
-				$('#umlagesatzU2').text(umlageWert);
-				$('#umlageU2erstattung').text(umlageErstattung);
-				slikcalc.gehaltsrechner.UmlageU2FormulaCalcRows.calculate();
-			});
-		
-		return this;
-		},
-		second: function() {
-			
-			// PROBLEM: Sometimes not going inside...
-			// CLICKING ONCE AGAIN ON THE CHECKBOXES SHOWS THE UPDATED VALUE
-			
-			// umlagesatzU1CheckBox - add Click listeneres
-			$(".umlagesatzU1CheckBox").click(function(){
-				var newClickId = $(this).attr("id");
-				//$("#textoutput").text($("#textoutput").text() + "new:" + newClickId + "//");
-				
-				// remove other checkboxes
-				$(".umlagesatzU1CheckBox").each(function(){
-					var othersumlagesatzU1radioId = $(this).attr("id");
-					if (othersumlagesatzU1radioId != newClickId) {
-						$(this).attr('checked', false);
-						//$("#textoutput").text($("#textoutput").text() + "(RE:"+othersumlagesatzU1radioId+")");
-					}
-				});
-			});
-		
-		return this;
-		},
-		third: function() {
-		
-			// update the result - bug fixing ...
-			//$("#textoutput").text($("#textoutput").text() + "("+count+")");
-			slikcalc.gehaltsrechner.setupUmlageU1FormulaCalcRows();
-			// slikcalc.gehaltsrechner.setupUmlageU2FormulaCalcRows();
-			if (count == 3) {
-				//$("#textoutput").text($("#textoutput").text() + "__");
-				updateKrankenkassename(kkXmlObj, kkName);
-			}
-			//$("#textoutput").text($("#textoutput").text() + "*");
-		
-		return this;
-		}
-	};
-	
-	chainExecution.first().second().third();
+}
+
+function selectedUmlageU1(thisObj) {
+	var selectedUmlageU1Id = $(this).attr("id");
+	var idNumber = selectedUmlageU1Id.charAt(selectedUmlageU1Id.length-1);
+	var umlagesatz = $('#umlagesatzU1Wert_'+idNumber).text();
 }
