@@ -21,8 +21,6 @@ $(document).ready(function() {
 });
 
 function readURLParameters() {
-
-	$("#textoutput").text($("#textoutput").text() + "-readURLParameters-");
 	
 	var urlKK = getUrlVar("kk");
 	if (urlKK.length != 0)
@@ -127,7 +125,6 @@ function addBindings() {
 	});
 	$("input:radio[name=kinderlos]").click(function(event) {
 		var selectedKinderlos = $(this).attr("value");
-		$("#textoutput").text($("#textoutput").text() + "-selectedKinderlos("+selectedKinderlos+")-");
 		updateKinderlosdaten(selectedKinderlos);
 	});
 }
@@ -164,7 +161,6 @@ function lohnsteuerberechnen() {
 }
 
 function initializeDaten() {
-	$("#textoutput").text($("#textoutput").text() + "-initializeDaten-");
 
 	var wohnortElement = $('#wohnort');
 	wohnortElement.append("<option value='keine'>Keine Kirchensteuer</option>");
@@ -231,7 +227,6 @@ function initializeDaten() {
 				kinderlosArr[kinderlos]["arbeitnehmer"] = arbeitnehmer;
 				
 				if (kinderlos == defaultKinderlos) {
-					$("#textoutput").text($("#textoutput").text() + "-defaultKinderlos("+defaultKinderlos+")");
 					// $("input:radio[name=kinderlos]:eq("+kinderlos+")").click();
 					$("#kinderlos"+kinderlos+"").click();
 				}
@@ -299,7 +294,6 @@ function initializeKrankenkassen() {
 }
 
 function updateKinderlosdaten(kinderlos) {
-	$("#textoutput").text($("#textoutput").text() + "-updateKinderlosdaten("+kinderlos+")-");
 	// get the data
 	var gesamt = kinderlosArr[kinderlos]["gesamt"];
 	var arbeitgeber = kinderlosArr[kinderlos]["arbeitgeber"];
