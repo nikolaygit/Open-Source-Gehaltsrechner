@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<krankenkassen>
+<krankenkasse id="aok-bw" name="AOK Baden-Württemberg">
+	<umlagesaetze jahr="2012" url="http://www.aok-business.de/baden-wuerttemberg/tools-service/beitraege-und-rechengroessen/umlage-und-erstattungssaetze/">
+		<umlagesatzU1 wert="0.6" erstattung="40" />
+		<umlagesatzU1 wert="2.0" erstattung="60" />
+		<umlagesatzU1 wert="2.4" erstattung="70" />
+		<umlagesatzU1 wert="3.7" erstattung="80" />
+		<umlagesatzU2 wert="0.27" erstattung="100" />
+	</umlagesaetze>
+</krankenkasse>
+<krankenkasse id="securvita" name="SECURVITA">
+	<umlagesaetze jahr="2012" url="http://www.securvita.de/fileadmin/user_upload/PDF-Dateien/krankenkasse/AG_Umlage_A002.pdf">
+		<umlagesatzU1 wert="1.5" erstattung="50" />
+		<umlagesatzU1 wert="2.1" erstattung="60" />
+		<umlagesatzU1 wert="3.5" erstattung="80" />
+		<umlagesatzU2 wert="0.36" erstattung="100" />
+	</umlagesaetze>
+</krankenkasse>
+<krankenkasse id="test" name="test">
+	<umlagesaetze jahr="2012" url="http://www.test.de/Umlage.pdf">
+		<umlagesatzU1 wert="0.1" erstattung="50" />
+		<umlagesatzU1 wert="0.2" erstattung="60" />
+		<umlagesatzU1 wert="0.3" erstattung="80" />
+		<umlagesatzU1 wert="0.4" erstattung="90" />
+		<umlagesatzU2 wert="0.22" erstattung="100" />
+	</umlagesaetze>
+</krankenkasse>
+<krankenkasse id="22222" name="2222222">
+	<umlagesaetze jahr="2012" url="http://www.test.de/Umlage.pdf">
+		<umlagesatzU1 wert="0.75" erstattung="60" />
+		<umlagesatzU1 wert="0.8" erstattung="80" />
+		<umlagesatzU1 wert="0.9" erstattung="90" />
+		<umlagesatzU2 wert="0.99" erstattung="100" />
+	</umlagesaetze>
+</krankenkasse>
+</krankenkassen>

@@ -1,66 +1,98 @@
-<html>
+﻿<html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	
 	<title>Open Source Gehaltsrechner</title>
 	
+	<link rel="stylesheet" type="text/css" media="all" href="public/css/style.css" />
+	
 	<!-- slikcalc dependancies http://slikcalc.selfcontained.us/-->
-	<script type="text/javascript" src="js/slikcalc.min.js"></script>
-	<script type="text/javascript" src="js/slikcalc.gehaltsrechner.js"></script>
+	<!-- source files
+	<script type="text/javascript" src="public/js/src/slikcalc.js"></script>
+	<script type="text/javascript" src="js/src/BaseCalc.js"></script>
+	<script type="text/javascript" src="js/src/ColumnCalc.js"></script>
+	<script type="text/javascript" src="js/src/FormulaCalc.js"></script>
+	<script type="text/javascript" src="js/src/slikcalc.adapter.js"></script>
+	-->
+	<script type="text/javascript" src="public/js/slikcalc.min.js"></script>
+	<script type="text/javascript" src="public/js/slikcalc.gehaltsrechner.js"></script>
 	
-	<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="public/js/jquery-1.8.0.min.js"></script>
 	
-	<script>
-		$(document).ready(function() {
-		  $('#bruttogehalt').bind('focusout', function(event) {
-			lohnsteuerberechnen();
-		  });
-		  $('#bruttogehalt').bind('keydown', function(event) {
-			$('#lohnsteuerbeitrag').text("0"); // clean on changes
-		  });
-		});
-		
-		function lohnsteuerberechnen() {
-			// The PHP script uses this interface: https://www.abgabenrechner.de/interface/
-			var bruttogehaltvalue = document.getElementById('bruttogehalt').value;			
-			$.ajax({
-				type: 'GET',
-				url: "lohnsteuer.php",
-				data: "RE4=" + bruttogehaltvalue,
-				dataType: "text",
-				success: function(data){
-					$('#lohnsteuerbeitrag').text(data);
-				},
-                error:function (result) {
-					alert('Service call failed: ' + result.status + ', ' + result.statusText);
-                }
-			});
-		}
-	</script>
-
-	<style media="screen" type="text/css">
-	.number{
-		text-align:right;
-	}
-	</style>
+	<script type="text/javascript" src="public/js/oseg.gehaltsrechner.js"></script>
 </head>
+
 <body>
-	<h1>Brutto Gehalt</h1>
-	<input type="text" id="bruttogehalt" />�
+	<div>
+		<div id="header" style="text-align: center">
+			<h1>Open Source Gehaltsrechner</h1>
+			<h3>Dateneingabe</h3>
+		</div>
+		<div id="datainput">
+			<table align="center">
+				<tr><td colspan="2"></td></tr>
+				<tr><td class="inputlabel">Bruttogehalt (monatlich):</td><td class="inputvalue"><input type="text" id="bruttogehalt" /> €</td></tr>
+				<tr><td class="inputlabel">Kinderlos und über 23 Jahre alt?</td><td class="inputvalue"><input type="radio" id="kinderlos1" name="kinderlos" value="1" checked="true" /><label for="1">Ja</label><input type="radio" id="kinderlos0" name="kinderlos" value="0" /><label for="0">Nein</label></td></tr>
+				<tr><td class="inputlabel">Krankenkasse:</td><td class="inputvalue"><select id="krankenkassen"></select></td></tr>
+				<tr><td class="inputlabel">Wohnortbundesland für Kirchensteuer (KiSt):</td><td class="inputvalue"><select id="wohnort"></select></td></tr>
+			</table>
+		</div>
+	</div>
+	
+			
+	<table id="kostentabelle" class="bordered">
+	<tr class="round"><th>Sozialversicherung</th><th>Gesamtbeitrag</th><th>Arbeitgeberbeitrag</th><th>Arbeitnehmerbeitrag</th><th>Berechnung</th><th>Quelle</th></tr>
+	
+	<tr><td>Krankenversicherung (KV)</td><td class="number"><span id="kvbeitrag"></span> €</td><td class="number"><span id="kvbeitrag_arbeitgeber"></span> €</td><td class="number"><span id="kvbeitrag_arbeitnehmer"></span> €</td><td class="berechnung"><span id="kvbeitragsatz"></span>%; Arbeitgeber: <span id="kvbeitragsatz_arbeitgeber"></span>%, Arbeitnehmer: <span id="kvbeitragsatz_arbeitnehmer"></span>%</td><td><a href="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" target="_blank">SV-Beiträge 2012</a></td></tr>
+	
+	<tr class="even"><td>Rentenversicherung (RV)</td><td class="number"><span id="rvbeitrag"></span> €</td><td class="number"><span id="rvbeitrag_arbeitgeber"></span> €</td><td class="number"><span id="rvbeitrag_arbeitnehmer"></span> €</td><td class="berechnung"><span id="rvbeitragsatz"></span>%; Arbeitgeber: <span id="rvbeitragsatz_arbeitgeber"></span>%, Arbeitnehmer: <span id="rvbeitragsatz_arbeitnehmer"></span>%</td><td><a href="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" target="_blank">SV-Beiträge 2012</a></td></tr>
 
-	<h1>Kosten</h1>
-	<table>
-	<tr><th>Sozialversicherung</th><th>Gesamtbeitrag</th><th>Arbeitgeberbeitrag</th><th>Arbeitnehmerbeitrag</th><th>Berechnung</th><th>Erkl�rung</th></tr>
+	<tr><td>Arbeitslosenversicherung (ALV)</td><td class="number"><span id="alvbeitrag"></span> €</td><td class="number"><span id="alvbeitrag_arbeitgeber"></span> €</td><td class="number"><span id="alvbeitrag_arbeitnehmer"></span> €</td><td class="berechnung"><span id="alvbeitragsatz"></span>%; Arbeitgeber: <span id="alvbeitragsatz_arbeitgeber"></span>%, Arbeitnehmer: <span id="alvbeitragsatz_arbeitnehmer"></span>%</td><td><a href="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" target="_blank">SV-Beiträge 2012</a></td></tr>
 	
-	<tr><td>Krankenversicherung (KV)</td><td class="number"><span id="kvbeitrag"></span>�</td><td class="number"><span id="kvbeitrag_arbeitgeber"></span>�</td><td class="number"><span id="kvbeitrag_arbeitnehmer"></span>�</td><td><span id="kvbeitragsatz">15.5</span>% * Bruttogehalt; Arbeitgeber: <span id="kvbeitragsatz_arbeitgeber">7.3</span>%, Arbeitnehmer: <span id="kvbeitragsatz_arbeitnehmer">8.2</span>%</td><td>...<td></tr>
+	<tr class="even"><td>Pflegeversicherung (PV)</td><td class="number"><span id="pvbeitrag"></span> €</td><td class="number"><span id="pvbeitrag_arbeitgeber"></span> €</td><td class="number"><span id="pvbeitrag_arbeitnehmer"></span> €</td><td class="berechnung"><span id="pvbeitragsatz">1.95</span>%; Arbeitgeber: <span id="pvbeitragsatz_arbeitgeber">0.975</span>%, Arbeitnehmer: <span id="pvbeitragsatz_arbeitnehmer">0.975</span>%</td><td><a href="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" target="_blank">SV-Beiträge 2012</a></td></tr>
 	
-	<tr><td>Rentenversicherung (RV)</td><td class="number"><span id="rvbeitrag"></span>�</td><td class="number"><span id="rvbeitrag_arbeitgeber"></span>�</td><td class="number"><span id="rvbeitrag_arbeitnehmer"></span>�</td><td><span id="rvbeitragsatz">19.6</span>% * Bruttogehalt; Arbeitgeber: <span id="rvbeitragsatz_arbeitgeber">9.8</span>%, Arbeitnehmer: <span id="rvbeitragsatz_arbeitnehmer">9.8</span>%</td><td>...<td></tr>
+	<tr><td>Lohnsteuer (LSt)</td><td class="number"><span id="lohnsteuerbeitrag"></span> €</td><td class="number"><span id="lohnsteuerbeitrag_arbeitgeber"></span> €</td><td class="number"><span id="lohnsteuerbeitrag_arbeitnehmer"></span> €</td><td class="berechnung"><input type="button" value="Neuberechnen" onclick="lohnsteuerberechnen()"> Nutzt <a href="https://www.abgabenrechner.de/interface/">dieses Interface</a></td><td><a href="https://www.abgabenrechner.de/">Abgaberechner</a></td></tr>
+	
+	<tr><td>Kirchensteuer (KiSt)</td><td class="number"><span id="kirchensteuerbeitrag"></span> €</td><td class="number"><span id="kirchensteuerbeitrag_arbeitgeber"></span> €</td><td class="number"><span id="kirchensteuerbeitrag_arbeitnehmer"></span> €</td><td class="berechnung">Für <span id="wohnortbundesland"></span>: <span id="kirchensteuersatz"></span>% von der Lohnsteuer</td><td><a href="http://www.lohn-info.de/kirchensteuer.html" target="_blank">Kirchensteuersätze 2012</a></td></tr>
+	
+	<tr class="even"><td>Insolvenzgeldumlage</td><td class="number"><span id="insolvenzbeitrag"></span> €</td><td class="number"><span id="insolvenzbeitrag_arbeitgeber"></span> €</td><td class="number"><span id="insolvenzbeitrag_arbeitnehmer"></span> €</td><td class="berechnung">Für 2012 ist es <span id="insolvenzbeitragsatz"></span>%. (<a href="http://www.lohn-info.de/insolvenzgeldumlage.html">wird jedes Jahr geändert</a>).</td><td><a href="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" target="_blank">SV-Beiträge 2012</a></td></tr>
+	
+	<tr><td>Umlage U1</td><td class="number"><span id="umlageu1beitrag"></span> €</td><td class="number"><span id="umlageu1beitrag_arbeitgeber"></span> €</td><td class="number"><span id="umlageu1beitrag_arbeitnehmer"></span> €</td><td class="berechnung">Für <span class="krankenkasse_name"></span>:
+	<div id="krankenkasse_umlagesaetze_u1"></div></div>
+	</td><td><a href="umlagesaetze.xml" target="_blank">Offene XML-Datei</a></td></tr>
 
-	<tr><td>Arbeitslosenversicherung (ALV)</td><td class="number"><span id="alvbeitrag"></span>�</td><td class="number"><span id="alvbeitrag_arbeitgeber"></span>�</td><td class="number"><span id="alvbeitrag_arbeitnehmer"></span>�</td><td><span id="alvbeitragsatz">3</span>% * Bruttogehalt; Arbeitgeber: <span id="alvbeitragsatz_arbeitgeber">1.5</span>%, Arbeitnehmer: <span id="alvbeitragsatz_arbeitnehmer">1.5</span>%</td><td>...<td></tr>
-	
-	<tr><td>Pflegeversicherung (PV)</td><td class="number"><span id="pvbeitrag"></span>�</td><td class="number"><span id="pvbeitrag_arbeitgeber"></span>�</td><td class="number"><span id="pvbeitrag_arbeitnehmer"></span>�</td><td><span id="pvbeitragsatz">1.95</span>% * Bruttogehalt; Arbeitgeber: <span id="pvbeitragsatz_arbeitgeber">0.975</span>%, Arbeitnehmer: <span id="pvbeitragsatz_arbeitnehmer">0.975</span>%</td><td>...<td></tr>
-	
-	<tr><td>Lohnsteuer</td><td class="number"><span id="lohnsteuerbeitrag"></span>�</td><td class="number"><span id="lohnsteuerbeitrag_arbeitgeber"></span>�</td><td class="number"><span id="lohnsteuerbeitrag_arbeitnehmer"></span>�</td><td>Nutzt <a href="https://www.abgabenrechner.de/interface/">dieses Interface</a> <input type="button" value="Neuberechnen" onclick="lohnsteuerberechnen()"></td><td>...<td></tr>
+	<tr class="even"><td>Umlage U2</td><td class="number"><span id="umlageu2beitrag"></span> €</td><td class="number"><span id="umlageu2beitrag_arbeitgeber"></span> €</td><td class="number"><span id="umlageu2beitrag_arbeitnehmer"></span> €</td><td class="berechnung">Für <span class="krankenkasse_name"></span>:
+	<div id="krankenkasse_umlagesaetze_u2"><span id='umlagesatzU2'></span>% (<span id='umlageU2erstattung'></span>% Erstattung)</div>
+	</td><td><a href="umlagesaetze.xml" target="_blank">Offene XML-Datei</a></td></tr>
 
 	</table>
-
+	
+	<div style="text-align: center">
+		<div class="parteieninfos">
+		<h3>Arbeitnehmer</h3>
+			Nettogehalt: <span id="nettogehalt_arbeitnehmer" class="round"></span> € = <br/>
+			<div id="nettogehalt_berechnung"><span id="netto_bruttogehalt"></span>(Brutto) - <span id="netto_kvbeitrag_arbeitnehmer"></span>(KV) - <span id="netto_rvbeitrag_arbeitnehmer"></span>(RV) - <span id="netto_alvbeitrag_arbeitnehmer"></span>(ALV) - <span id="netto_pvbeitrag_arbeitnehmer"></span>(PV) - <span id="netto_lohnsteuerbeitrag_arbeitnehmer"></span>(LSt)  - <span id="netto_kirchensteuerbeitrag_arbeitnehmer"></span>(KiSt)</div>
+		</div>
+		
+		<div class="parteieninfos">
+		<h3>Arbeitgeber</h3>
+		Der Arbeitgeber zahlt: 
+		</div>
+		
+		<span id="umlageu1beitragxxx" class="hidden">0</span>
+		<span id="umlageu1beitragyyy" class="hidden">0</span>
+		<span id="umlageu1beitragzzz" class="hidden">0</span>
+		<span id="umlageu1beitragwww" class="hidden">0</span>
+		
+		<span id="textoutput"></span>
+	</div>
+	
+	
+	<div id="footer">
+		Dieses Open Souce Gehaltsrechner wird Ihnen gemeinfrei gegeben durch: <br/>
+		<a href="http://wiki.opensourceecology.de"><img src="http://wiki.opensourceecology.de/skins/common/images/wiki.png" title="Open Source Ecology Germany" /></a>
+		<a href="http://www.velaia.de"><img src="http://wiki.opensourceecology.de/images/a/a9/Velaia_logo.png" title="velaia GmbH"/></a>
+	</div>
+	
 </body>
 </html>
