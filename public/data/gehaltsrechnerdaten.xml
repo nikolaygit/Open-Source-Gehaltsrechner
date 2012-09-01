@@ -13,7 +13,7 @@
 	</arbeitslosenversicherung>
 	<pflegeversicherung>
 		<beitragsatz kinderlos="0" gesamt="1.95" arbeitgeber="0.975" arbeitnehmer="0.975"/>
-		<beitragsatz kinderlos="1" gesamt="2.2" arbeitgeber="1.1" arbeitnehmer="1.1"/>
+		<beitragsatz kinderlos="1" gesamt="2.2" arbeitgeber="0.975" arbeitnehmer="1.225"/>
 	</pflegeversicherung>
 </sozialversicherungsbeitraege>
 
