@@ -55,7 +55,7 @@
 	
 	<tr><td>Kirchensteuer (KiSt)</td><td class="number"><span id="kirchensteuerbeitrag"></span> €</td><td class="number"><span id="kirchensteuerbeitrag_arbeitgeber"></span> €</td><td class="number"><span id="kirchensteuerbeitrag_arbeitnehmer"></span> €</td><td class="berechnung">Für <span id="wohnortbundesland"></span>: <span id="kirchensteuersatz"></span>% von der Lohnsteuer</td><td><a href="http://www.lohn-info.de/kirchensteuer.html" target="_blank">Kirchensteuersätze 2012</a></td></tr>
 	
-	<tr class="even"><td>Insolvenzgeldumlage</td><td class="number"><span id="insolvenzbeitrag"></span> €</td><td class="number"><span id="insolvenzbeitrag_arbeitgeber"></span> €</td><td class="number"><span id="insolvenzbeitrag_arbeitnehmer"></span> €</td><td class="berechnung">Für 2012 ist es <span id="insolvenzbeitragsatz"></span>%. (<a href="http://www.lohn-info.de/insolvenzgeldumlage.html">wird jedes Jahr geändert</a>).</td><td><a href="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" target="_blank">SV-Beiträge 2012</a></td></tr>
+	<tr class="even"><td>Insolvenzgeldumlage (INSO)</td><td class="number"><span id="insolvenzbeitrag"></span> €</td><td class="number"><span id="insolvenzbeitrag_arbeitgeber"></span> €</td><td class="number"><span id="insolvenzbeitrag_arbeitnehmer"></span> €</td><td class="berechnung">Für 2012 ist es <span id="insolvenzbeitragsatz"></span>%. (<a href="http://www.lohn-info.de/insolvenzgeldumlage.html">wird jedes Jahr geändert</a>).</td><td><a href="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" target="_blank">SV-Beiträge 2012</a></td></tr>
 	
 	<tr><td>Umlage U1</td><td class="number"><span id="umlageu1beitrag"></span> €</td><td class="number"><span id="umlageu1beitrag_arbeitgeber"></span> €</td><td class="number"><span id="umlageu1beitrag_arbeitnehmer"></span> €</td><td class="berechnung">Für <span class="krankenkasse_name"></span>:
 	<div id="krankenkasse_umlagesaetze_u111">
@@ -74,14 +74,24 @@
 	
 	<div style="text-align: center">
 		<div class="parteieninfos">
-		<h3>Arbeitnehmer</h3>
-			Nettogehalt: <span id="nettogehalt_arbeitnehmer" class="round"></span> € = <br/>
+		<h3>Nettogehalt des Arbeitnehmers:</h3>
+			<div style="padding-bottom:8px;"><span id="nettogehalt_arbeitnehmer" class="round"></span> € =</div>
 			<div id="nettogehalt_berechnung"><span id="netto_bruttogehalt"></span>(Brutto) - <span id="netto_kvbeitrag_arbeitnehmer"></span>(KV) - <span id="netto_rvbeitrag_arbeitnehmer"></span>(RV) - <span id="netto_alvbeitrag_arbeitnehmer"></span>(ALV) - <span id="netto_pvbeitrag_arbeitnehmer"></span>(PV) - <span id="netto_lohnsteuerbeitrag_arbeitnehmer"></span>(LSt)  - <span id="netto_kirchensteuerbeitrag_arbeitnehmer"></span>(KiSt)</div>
 		</div>
 		
 		<div class="parteieninfos">
-		<h3>Arbeitgeber</h3>
-		Der Arbeitgeber zahlt: 
+			<h3>Der Arbeitgeber zahlt:</h3>			
+			<table id="arbeitgebertabelle" class="bordered">
+			<tr class="round"><th>Zahlungsempfänger</th><th>Was</th><th style="min-width: 120px;">Beitrag</th><th>Beitragsberechnung</th><th>Wie</th></tr>
+			<tr><td>Arbeitnehmer</td><td>Nettogehalt</td><td class="number"><span id="nettogehalt_ag"></span> €</td><td>Siehe oben</td><td>Überweisung</td></tr>
+			<tr><td>Krankenkasse (KK)</td><td>Sozialversicherungen</td><td class="number"><span id="sozialversicherungenbeitrag_ag"></span> €</td>
+				<td><span id="kvbeitrag_svag"></span>(KV) + <span id="rvbeitrag_svag"></span>(RV) + <span id="alvbeitrag_svag"></span>(ALV) + <span id="pvbeitrag_svag"></span>(PV) + <span id="insolvenzbeitrag_svag"></span>(INSO) + <span id="umlageu1beitrag_svag"></span>(U1) + <span id="umlageu2beitrag_svag"></span>(U2)
+				</td><td>1) Alle Sozialversicherungen über <a href="http://wiki.opensourceecology.de/wiki/Sv.net" target="_blank">sv.net anmelden</a> und<br/>2) das Geld an der KK überweisen</td></tr>
+			<tr><td>Finanzamt</td><td>Lohnsteuer</td><td class="number"><span id="lohnsteuerbeitrag_ag">0</span> €</td><td>Siehe die obere Tabelle</td><td><a href="http://www.elster.de" target="_blank">http://www.elster.de</a></td></tr>
+			<tr><td>Finanzamt</td><td>Kirchensteuer</td><td class="number"><span id="kirchensteuerbeitrag_ag">0</span> €</td><td>Siehe die obere Tabelle</td><td><a href="http://www.elster.de" target="_blank">http://www.elster.de</a></td></tr>
+			<tr><td>VBG (Verwaltungs-Berufsgenossenschaft)</td><td>Unfallversicherung</td><td class="number"><span id="unfallversicherung_ag"></span> €</td><td>Noch zu erfahren</td><td>1) Unternehmen in <a href="http://www.vbg.de/DE/Service_at_VBG/Unternehmensanmeldung/unternehmen/unternehmen_node.html" target="_blank">vbg.de anmelden</a> (<a href="https://www.vbg.de/lip/resources/071A539ED285714A5740/form/MUB002i.pdf?%24returnTo=https%3A%2F%2Fwww.vbg.de%2Flip%2Fform%2Fdisplay.do%3F%2524context%3D071A539ED285714A5740&%24context=071A539ED285714A5740" target="_blank">Infos</a>)<br/>2) Papiere per Post erhalten<br/>3) TODO ... </td></tr>
+			</table>
+			Insgesamt: <span id="gesamtkosten_ag"></span> €.
 		</div>
 		
 		<span id="umlageu1beitragxxx" class="hidden">0</span>

@@ -22,6 +22,8 @@ slikcalc.gehaltsrechner = {
 	InsolvenzFormulaCalc : {},
 	
 	ANNettoFormulaCalc : {},
+	AGSVFormulaCalc : {},
+	//AGGesamtKostenFormulaCalc : {},
 
 	initialize : function() {
 		this.setupKVFormulaCalc();
@@ -46,6 +48,8 @@ slikcalc.gehaltsrechner = {
 		this.setupInsolvenzFormulaCalc();
 		
 		this.setupANNettoFormulaCalc();
+		this.setupAGSVFormulaCalc();
+		//this.setupAGGesamtKostenFormulaCalc();
 	},
 
 	
@@ -304,6 +308,41 @@ slikcalc.gehaltsrechner = {
 				f: { id: 'netto_lohnsteuerbeitrag_arbeitnehmer'},
 				g: { id: 'netto_kirchensteuerbeitrag_arbeitnehmer'},
 				n: { id: 'nettogehalt_arbeitnehmer'}
+			}
+		});
+	},
+	
+	// ---------------- Sozialversicherungen-Arbeitgeber ---------------------
+	setupAGSVFormulaCalc : function() {
+		this.AGSVFormulaCalc = slikcalc.create('formula', {
+			formula: '{a} + {b} + {c} + {d} + {e} + {f} + {g} = {s}',
+			calcOnLoad: true,
+            registerListeners: true,
+			vars: {
+				a: { id: 'kvbeitrag_svag'},
+				b: { id: 'rvbeitrag_svag'},
+				c: { id: 'alvbeitrag_svag'},
+				d: { id: 'pvbeitrag_svag'},
+				g: { id: 'insolvenzbeitrag_svag'},
+				e: { id: 'umlageu1beitrag_svag'},
+				f: { id: 'umlageu2beitrag_svag'},
+				s: { id: 'sozialversicherungenbeitrag_ag'}
+			}
+		});
+	},
+	
+	// ---------------- GesamtKosten-Arbeitgeber (Alles)---------------------
+	setupAGGesamtKostenFormulaCalc : function() {
+		this.AGGesamtKostenFormulaCalc = slikcalc.create('formula', {
+			formula: '{a} + {b} + {c} + {d} = {s}',
+			calcOnLoad: true,
+            registerListeners: true,
+			vars: {
+				a: { id: 'nettogehalt_ag'},
+				b: { id: 'sozialversicherungenbeitrag_ag'},
+				c: { id: 'lohnsteuerbeitrag_ag'},
+				d: { id: 'kirchensteuerbeitrag_ag'},
+				s: { id: 'gesamtkosten_ag'}
 			}
 		});
 	}

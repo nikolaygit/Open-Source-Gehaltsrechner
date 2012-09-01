@@ -61,44 +61,72 @@ function addBindings() {
 	$('#bruttogehalt').keydown(function(){
 		clearTimeout(typingTimer);
 	});
+	$('#kvbeitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
+		$('#kvbeitrag_svag').text($('#kvbeitrag').text());
+		slikcalc.gehaltsrechner.AGSVFormulaCalc.calculate();
+	});
 	$('#kvbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_kvbeitrag_arbeitnehmer').text($('#kvbeitrag_arbeitnehmer').text());
 		slikcalc.gehaltsrechner.ANNettoFormulaCalc.calculate();
+	});
+	$('#rvbeitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
+		$('#rvbeitrag_svag').text($('#rvbeitrag').text());
+		slikcalc.gehaltsrechner.AGSVFormulaCalc.calculate();
 	});
 	$('#rvbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_rvbeitrag_arbeitnehmer').text($('#rvbeitrag_arbeitnehmer').text());
 		slikcalc.gehaltsrechner.ANNettoFormulaCalc.calculate();
 	});
+	$('#alvbeitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
+		$('#alvbeitrag_svag').text($('#alvbeitrag').text());
+		slikcalc.gehaltsrechner.AGSVFormulaCalc.calculate();
+	});
 	$('#alvbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_alvbeitrag_arbeitnehmer').text($('#alvbeitrag_arbeitnehmer').text());
 		slikcalc.gehaltsrechner.ANNettoFormulaCalc.calculate();
+	});
+	$('#pvbeitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
+		$('#pvbeitrag_svag').text($('#pvbeitrag').text());
+		slikcalc.gehaltsrechner.AGSVFormulaCalc.calculate();
 	});
 	$('#pvbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_pvbeitrag_arbeitnehmer').text($('#pvbeitrag_arbeitnehmer').text());
 		slikcalc.gehaltsrechner.ANNettoFormulaCalc.calculate();
 	});
 	$('#lohnsteuerbeitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
-		$('#lohnsteuerbeitrag_arbeitnehmer').text($('#lohnsteuerbeitrag').text());
+		var lohnsteuerbeitrag = $('#lohnsteuerbeitrag').text();
+		$('#lohnsteuerbeitrag_arbeitnehmer').text(lohnsteuerbeitrag);
+		$('#lohnsteuerbeitrag_ag').text(lohnsteuerbeitrag);
 	});
 	$('#lohnsteuerbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_lohnsteuerbeitrag_arbeitnehmer').text($('#lohnsteuerbeitrag_arbeitnehmer').text());
-		slikcalc.gehaltsrechner.ANNettoFormulaCalc.calculate();
 	});
 	$('#kirchensteuerbeitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
-		$('#kirchensteuerbeitrag_arbeitnehmer').text($('#kirchensteuerbeitrag').text());
+		var kirchensteuerbeitrag = $('#kirchensteuerbeitrag').text();
+		$('#kirchensteuerbeitrag_arbeitnehmer').text(kirchensteuerbeitrag);
+		$('#kirchensteuerbeitrag_ag').text(kirchensteuerbeitrag);
 	});
 	$('#kirchensteuerbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_kirchensteuerbeitrag_arbeitnehmer').text($('#kirchensteuerbeitrag_arbeitnehmer').text());
 		slikcalc.gehaltsrechner.ANNettoFormulaCalc.calculate();
 	});
-	$('#umlageu1beitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
-		$('#umlageu1beitrag_arbeitgeber').text($('#umlageu1beitrag').text());
-	});
-	$('#umlageu2beitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
-		$('#umlageu2beitrag_arbeitgeber').text($('#umlageu2beitrag').text());
+	$('#nettogehalt_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
+		$('#nettogehalt_ag').text($('#nettogehalt_arbeitnehmer').text());
 	});
 	$('#insolvenzbeitrag').bind('DOMSubtreeModified', function(event) {
 		$('#insolvenzbeitrag_arbeitgeber').text($('#insolvenzbeitrag').text()); // mirror the value
+		$('#insolvenzbeitrag_svag').text($('#insolvenzbeitrag').text());
+		slikcalc.gehaltsrechner.AGSVFormulaCalc.calculate();
+	});
+	$('#umlageu1beitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
+		$('#umlageu1beitrag_arbeitgeber').text($('#umlageu1beitrag').text());
+		$('#umlageu1beitrag_svag').text($('#umlageu1beitrag').text());
+		slikcalc.gehaltsrechner.AGSVFormulaCalc.calculate();
+	});
+	$('#umlageu2beitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
+		$('#umlageu2beitrag_arbeitgeber').text($('#umlageu2beitrag').text());
+		$('#umlageu2beitrag_svag').text($('#umlageu2beitrag').text());
+		slikcalc.gehaltsrechner.AGSVFormulaCalc.calculate();
 	});
 	$('#krankenkassen').bind('change', function(event) {
 		var selectedOption = $('#krankenkassen').find(":selected");
@@ -107,7 +135,7 @@ function addBindings() {
 		var kkXMLSelectedEl = kkXML[kkId];
 		//$("#textoutput").text($("#textoutput").text() + ":C:");
 		if (kkXMLSelectedEl == undefined) {
-			alert("Die Umlagedaten für die ausgewählte Krankenkasse mit ID "+kkId+" wurden nicht geladen.");
+			alert("Die Umlagedaten fÃ¼r die ausgewÃ¤hlte Krankenkasse mit ID "+kkId+" wurden nicht geladen.");
 		} else {
 			updateKrankenkassename(kkXMLSelectedEl, kkName);
 			$('#umlagesatzU1CheckBox_1').trigger('click');
@@ -123,6 +151,19 @@ function addBindings() {
 	$("input:radio[name=kinderlos]").click(function(event) {
 		var selectedKinderlos = $(this).attr("value");
 		updateKinderlosdaten(selectedKinderlos);
+	});
+
+	$('#nettogehalt_ag').bind('DOMSubtreeModified', function(event) { // mirror the value
+		updateGesamtKostenAG();
+	});
+	$('#sozialversicherungenbeitrag_ag').bind('DOMSubtreeModified', function(event) { // mirror the value
+		updateGesamtKostenAG();
+	});
+	$('#lohnsteuerbeitrag_ag').bind('DOMSubtreeModified', function(event) { // mirror the value
+		updateGesamtKostenAG();
+	});
+	$('#kirchensteuerbeitrag_ag').bind('DOMSubtreeModified', function(event) { // mirror the value
+		updateGesamtKostenAG();
 	});
 }
 
@@ -168,7 +209,7 @@ function initializeDaten() {
 		success: function(data) {
 			rechnerXML = $(data);
 			
-			// set KV-Beitragssätze
+			// set KV-Beitragssï¿½tze
 			rechnerXML.find('krankenversicherung beitragsatz').each(function(){
 				var gesamt = $(this).attr("gesamt");
 				var arbeitgeber = $(this).attr("arbeitgeber");
@@ -182,7 +223,7 @@ function initializeDaten() {
 				slikcalc.gehaltsrechner.KVAGFormulaCalc.calculate();
 			});
 			
-			// set RV-Beitragssätze
+			// set RV-Beitragssï¿½tze
 			rechnerXML.find('rentenversicherung beitragsatz').each(function(){
 				var gesamt = $(this).attr("gesamt");
 				var arbeitgeber = $(this).attr("arbeitgeber");
@@ -196,7 +237,7 @@ function initializeDaten() {
 				slikcalc.gehaltsrechner.RVAGFormulaCalc.calculate();
 			});
 			
-			// set ALV-Beitragssätze
+			// set ALV-BeitragssÃ¤tze
 			rechnerXML.find('arbeitslosenversicherung beitragsatz').each(function(){
 				var gesamt = $(this).attr("gesamt");
 				var arbeitgeber = $(this).attr("arbeitgeber");
@@ -210,7 +251,7 @@ function initializeDaten() {
 				slikcalc.gehaltsrechner.ALVAGFormulaCalc.calculate();
 			});
 			
-			// set PV-Beitragssätze
+			// set PV-BeitragssÃ¤tze
 			rechnerXML.find('pflegeversicherung beitragsatz').each(function(){
 				var kinderlos = $(this).attr("kinderlos");
 				var gesamt = $(this).attr("gesamt");
@@ -284,7 +325,7 @@ function initializeKrankenkassen() {
 			});
 		},
 		error:function (result) {
-			alert("Die Umlagesätze konnten nicht abgerufen werden: " + result.status + ", " + result.statusText);
+			alert("Die UmlagesÃ¤tze konnten nicht abgerufen werden: " + result.status + ", " + result.statusText);
 		}
 	});
 }
@@ -367,4 +408,16 @@ function updateKrankenkassename(kkXmlObj, kkName) {
 		slikcalc.gehaltsrechner.UmlageU2FormulaCalcRows.calculate();
 	});
 	
+}
+
+function updateGesamtKostenAG() {
+	var nettogehalt_ag = parseFloat($('#nettogehalt_ag').text());
+	var sozialversicherungenbeitrag_ag = parseFloat($('#sozialversicherungenbeitrag_ag').text());
+	var lohnsteuerbeitrag_ag = parseFloat($('#lohnsteuerbeitrag_ag').text());
+	var kirchensteuerbeitrag_ag = parseFloat($('#kirchensteuerbeitrag_ag').text());
+	
+	var gesamtkosten_ag = nettogehalt_ag + sozialversicherungenbeitrag_ag + lohnsteuerbeitrag_ag + kirchensteuerbeitrag_ag;
+	gesamtkosten_ag = gesamtkosten_ag.toFixed(commaPrecision);
+	
+	$('#gesamtkosten_ag').text(gesamtkosten_ag);
 }
