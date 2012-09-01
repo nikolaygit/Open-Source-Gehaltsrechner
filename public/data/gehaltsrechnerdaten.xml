@@ -4,21 +4,26 @@
 <sozialversicherungsbeitraege jahr="2012">
 	<krankenversicherung>
 		<beitragsatz gesamt="15.5" arbeitgeber="7.3" arbeitnehmer="8.2"/>
+		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" />
 	</krankenversicherung>
 	<rentenversicherung>
 		<beitragsatz gesamt="19.6" arbeitgeber="9.8" arbeitnehmer="9.8"/>
+		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" />
 	</rentenversicherung>
 	<arbeitslosenversicherung>
 		<beitragsatz gesamt="3" arbeitgeber="1.5" arbeitnehmer="1.5"/>
+		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" />
 	</arbeitslosenversicherung>
 	<pflegeversicherung>
 		<beitragsatz kinderlos="0" gesamt="1.95" arbeitgeber="0.975" arbeitnehmer="0.975"/>
 		<beitragsatz kinderlos="1" gesamt="2.2" arbeitgeber="0.975" arbeitnehmer="1.225"/>
+		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" />
 	</pflegeversicherung>
 </sozialversicherungsbeitraege>
 
 <umlagen>
 	<insolvenzgeldumlage jahr="2012" beitragsatz="0.04" />
+	<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" />
 </umlagen>
 
 <steuer>
@@ -39,6 +44,7 @@
 		<bundesland id="st"><kirchensteuersatz>9</kirchensteuersatz><mindestkirchensteuer hinweise="Die Mindestkirchensteuer wird nur von der evangelischen Kirche erhoben.">3.60</mindestkirchensteuer></bundesland>
 		<bundesland id="sh"><kirchensteuersatz>9</kirchensteuersatz><mindestkirchensteuer hinweise="Die Mindestkirchensteuer wird nur von der evangelischen Kirche erhoben.">3.60</mindestkirchensteuer></bundesland>
 		<bundesland id="th"><kirchensteuersatz>9</kirchensteuersatz><mindestkirchensteuer hinweise="Die Mindestkirchensteuer wird nur von der evangelischen Kirche erhoben.">3.60</mindestkirchensteuer></bundesland>
+		<quelle url="http://www.lohn-info.de/kirchensteuer.html" />
 	</kirchensteuer>
 </steuer>
 
