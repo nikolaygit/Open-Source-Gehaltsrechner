@@ -14,7 +14,7 @@
 		<umlagesatzU1 wert="1.2" erstattung="40" />
 		<umlagesatzU1 wert="2.1" erstattung="70" />
 		<umlagesatzU1 wert="3.3" erstattung="80" />
-		<umlagesatzU2 wert="0.36" erstattung="100" />
+		<umlagesatzU2 wert="0.39" erstattung="100" />
 	</umlagesaetze>
 </krankenkasse>
 <krankenkasse id="securvita" name="SECURVITA">
