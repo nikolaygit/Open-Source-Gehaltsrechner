@@ -61,50 +61,41 @@ function addBindings() {
 	$('#bruttogehalt').keydown(function(){
 		clearTimeout(typingTimer);
 	});
-	//$('#bruttogehalt').bind('DOMCharacterDataModified', function(event) {
-	//});
 	$('#kvbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_kvbeitrag_arbeitnehmer').text($('#kvbeitrag_arbeitnehmer').text());
+		slikcalc.gehaltsrechner.ANNettoFormulaCalc.calculate();
 	});
 	$('#rvbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_rvbeitrag_arbeitnehmer').text($('#rvbeitrag_arbeitnehmer').text());
+		slikcalc.gehaltsrechner.ANNettoFormulaCalc.calculate();
 	});
 	$('#alvbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_alvbeitrag_arbeitnehmer').text($('#alvbeitrag_arbeitnehmer').text());
+		slikcalc.gehaltsrechner.ANNettoFormulaCalc.calculate();
 	});
 	$('#pvbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_pvbeitrag_arbeitnehmer').text($('#pvbeitrag_arbeitnehmer').text());
+		slikcalc.gehaltsrechner.ANNettoFormulaCalc.calculate();
 	});
 	$('#lohnsteuerbeitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#lohnsteuerbeitrag_arbeitnehmer').text($('#lohnsteuerbeitrag').text());
 	});
 	$('#lohnsteuerbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_lohnsteuerbeitrag_arbeitnehmer').text($('#lohnsteuerbeitrag_arbeitnehmer').text());
+		slikcalc.gehaltsrechner.ANNettoFormulaCalc.calculate();
 	});
 	$('#kirchensteuerbeitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#kirchensteuerbeitrag_arbeitnehmer').text($('#kirchensteuerbeitrag').text());
 	});
 	$('#kirchensteuerbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_kirchensteuerbeitrag_arbeitnehmer').text($('#kirchensteuerbeitrag_arbeitnehmer').text());
+		slikcalc.gehaltsrechner.ANNettoFormulaCalc.calculate();
 	});
 	$('#umlageu1beitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#umlageu1beitrag_arbeitgeber').text($('#umlageu1beitrag').text());
 	});
 	$('#umlageu2beitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#umlageu2beitrag_arbeitgeber').text($('#umlageu2beitrag').text());
-	});
-	$('#nettogehalt_berechnung').bind('DOMSubtreeModified', function(event) { // mirror the value
-		var bruttogehalt = $('#bruttogehalt').val();
-		var netto_kvbeitrag_arbeitnehmer = $('#netto_kvbeitrag_arbeitnehmer').text();
-		var netto_rvbeitrag_arbeitnehmer = $('#netto_rvbeitrag_arbeitnehmer').text();
-		var netto_alvbeitrag_arbeitnehmer = $('#netto_alvbeitrag_arbeitnehmer').text();
-		var netto_pvbeitrag_arbeitnehmer = $('#netto_pvbeitrag_arbeitnehmer').text();
-		var netto_lohnsteuerbeitrag_arbeitnehmer = $('#netto_lohnsteuerbeitrag_arbeitnehmer').text();
-		var netto_kirchensteuerbeitrag_arbeitnehmer = $('#netto_kirchensteuerbeitrag_arbeitnehmer').text();
-		
-		var nettogehalt = bruttogehalt - netto_kvbeitrag_arbeitnehmer - netto_rvbeitrag_arbeitnehmer - netto_alvbeitrag_arbeitnehmer - netto_pvbeitrag_arbeitnehmer - netto_lohnsteuerbeitrag_arbeitnehmer - netto_kirchensteuerbeitrag_arbeitnehmer;
-		nettogehalt = nettogehalt.toFixed(commaPrecision);
-		$('#nettogehalt_arbeitnehmer').text(nettogehalt);
 	});
 	$('#insolvenzbeitrag').bind('DOMSubtreeModified', function(event) {
 		$('#insolvenzbeitrag_arbeitgeber').text($('#insolvenzbeitrag').text()); // mirror the value
@@ -132,9 +123,6 @@ function addBindings() {
 	$("input:radio[name=kinderlos]").click(function(event) {
 		var selectedKinderlos = $(this).attr("value");
 		updateKinderlosdaten(selectedKinderlos);
-	});
-	$('input:radio[name=umlagesatz_u1]').change(function() {
-		selectedUmlageU1($(this));
 	});
 }
 
@@ -379,10 +367,4 @@ function updateKrankenkassename(kkXmlObj, kkName) {
 		slikcalc.gehaltsrechner.UmlageU2FormulaCalcRows.calculate();
 	});
 	
-}
-
-function selectedUmlageU1(thisObj) {
-	var selectedUmlageU1Id = $(this).attr("id");
-	var idNumber = selectedUmlageU1Id.charAt(selectedUmlageU1Id.length-1);
-	var umlagesatz = $('#umlagesatzU1Wert_'+idNumber).text();
 }

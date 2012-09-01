@@ -303,7 +303,7 @@ slikcalc.gehaltsrechner = {
 				e: { id: 'netto_pvbeitrag_arbeitnehmer'},
 				f: { id: 'netto_lohnsteuerbeitrag_arbeitnehmer'},
 				g: { id: 'netto_kirchensteuerbeitrag_arbeitnehmer'},
-				n: { id: 'nettogehalt_arbeitnehmerFFFFFFFFFFFFFFFFFFFFFFF'}
+				n: { id: 'nettogehalt_arbeitnehmer'}
 			}
 		});
 	}
