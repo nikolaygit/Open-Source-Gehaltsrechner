@@ -11,7 +11,7 @@ IMPORTANT: The source code is from 2012 and does not represent AT ALL the curren
 ULR Parameters
 ==============
 You can share the calculation of the salary of a person, just by sending him a link with the appropriate parameters.
-For example: http://opensourceecology.de/tools/gehaltsrechner/?bruttogehalt=1350&kinderlos=1&kk=aok-bw&kirchensteuer=bw
+For example: http://nikolayhg.github.io/Open-Source-Gehaltsrechner/?bruttogehalt=5000&kinderlos=1&kk=securvita&kirchensteuer=keine
 
 The following parameters are supported:
 * bruttogehalt -> the brutto salary
