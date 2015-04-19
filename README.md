@@ -10,7 +10,7 @@ IMPORTANT (Source): The source code is from 2012 and does not represent AT ALL t
 IMPORTANT (Data):
 
 * Solidaritätszuschlag fehlt.
-* Der Arbeitgeber ist verpflichtet, den Solidaritätszuschlag vom Arbeitslohn einzubehalten und an das Finanzamt abzuführen ([http://www.lohn-info.de/solizuschlag.html](Source)).
+* Der Arbeitgeber ist verpflichtet, den Solidaritätszuschlag vom Arbeitslohn einzubehalten und an das Finanzamt abzuführen(Source: [lohn-info.de](http://www.lohn-info.de/solizuschlag.html)).
 
 ULR Parameters
 ==============
