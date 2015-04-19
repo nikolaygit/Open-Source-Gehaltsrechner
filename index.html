@@ -1,0 +1,292 @@
+﻿<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <title>Open Source Gehaltsrechner 2015</title>
+
+  <link rel="stylesheet" type="text/css" media="all" href="public/css/style.css"/>
+
+  <!-- slikcalc dependancies http://slikcalc.selfcontained.us/-->
+  <!-- source files
+  <script type="text/javascript" src="public/js/src/slikcalc.js"></script>
+  <script type="text/javascript" src="js/src/BaseCalc.js"></script>
+  <script type="text/javascript" src="js/src/ColumnCalc.js"></script>
+  <script type="text/javascript" src="js/src/FormulaCalc.js"></script>
+  <script type="text/javascript" src="js/src/slikcalc.adapter.js"></script>
+  -->
+  <script type="text/javascript" src="public/js/slikcalc.min.js"></script>
+  <script type="text/javascript" src="public/js/slikcalc.gehaltsrechner.js"></script>
+
+  <script type="text/javascript" src="public/js/jquery-1.8.0.min.js"></script>
+
+  <script type="text/javascript" src="public/js/oseg.gehaltsrechner.js"></script>
+</head>
+
+<body>
+<div>
+  <div id="header" style="text-align: center">
+    <h1>Open Source Gehaltsrechner 2015</h1>
+
+    <h3>Dateneingabe</h3>
+  </div>
+  <div id="datainput">
+    <table align="center">
+      <tr>
+        <td colspan="2"></td>
+      </tr>
+      <tr>
+        <td class="inputlabel">Bruttogehalt (monatlich):</td>
+        <td class="inputvalue"><input type="text" id="bruttogehalt"/> €</td>
+      </tr>
+      <tr>
+        <td class="inputlabel">Kinderlos und über 23 Jahre alt?</td>
+        <td class="inputvalue"><input type="radio" id="kinderlos1" name="kinderlos" value="1" checked="true"/><label
+            for="1">Ja</label><input type="radio" id="kinderlos0" name="kinderlos" value="0"/><label
+            for="0">Nein</label></td>
+      </tr>
+      <tr>
+        <td class="inputlabel">Krankenkasse:</td>
+        <td class="inputvalue"><select id="krankenkassen"></select></td>
+      </tr>
+      <tr>
+        <td class="inputlabel">Wohnortbundesland für Kirchensteuer (KiSt):</td>
+        <td class="inputvalue"><select id="wohnort"></select></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+<table id="kostentabelle" class="bordered">
+  <tr class="round">
+    <th>Sozialversicherung</th>
+    <th>Gesamtbeitrag</th>
+    <th>Arbeitgeberbeitrag</th>
+    <th>Arbeitnehmerbeitrag</th>
+    <th>Berechnung</th>
+    <th>Quelle</th>
+  </tr>
+
+  <tr>
+    <td>Krankenversicherung (KV)</td>
+    <td class="number"><span id="kvbeitrag"></span> €</td>
+    <td class="number"><span id="kvbeitrag_arbeitgeber"></span> €</td>
+    <td class="number"><span id="kvbeitrag_arbeitnehmer"></span> €</td>
+    <td class="berechnung"><span id="kvbeitragsatz"></span>%; Arbeitgeber: <span id="kvbeitragsatz_arbeitgeber"></span>%,
+      Arbeitnehmer: <span id="kvbeitragsatz_arbeitnehmer"></span>%
+    </td>
+    <td><a href="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" target="_blank">SV-Beiträge 2012</a> (<a
+        href="public/data/gehaltsrechnerdaten.xml" target="_blank">XML</a>)
+    </td>
+  </tr>
+
+  <tr class="even">
+    <td>Rentenversicherung (RV)</td>
+    <td class="number"><span id="rvbeitrag"></span> €</td>
+    <td class="number"><span id="rvbeitrag_arbeitgeber"></span> €</td>
+    <td class="number"><span id="rvbeitrag_arbeitnehmer"></span> €</td>
+    <td class="berechnung"><span id="rvbeitragsatz"></span>%; Arbeitgeber: <span id="rvbeitragsatz_arbeitgeber"></span>%,
+      Arbeitnehmer: <span id="rvbeitragsatz_arbeitnehmer"></span>%
+    </td>
+    <td><a href="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" target="_blank">SV-Beiträge 2012</a> (<a
+        href="public/data/gehaltsrechnerdaten.xml" target="_blank">XML</a>)
+    </td>
+  </tr>
+
+  <tr>
+    <td>Arbeitslosenversicherung (ALV)</td>
+    <td class="number"><span id="alvbeitrag"></span> €</td>
+    <td class="number"><span id="alvbeitrag_arbeitgeber"></span> €</td>
+    <td class="number"><span id="alvbeitrag_arbeitnehmer"></span> €</td>
+    <td class="berechnung"><span id="alvbeitragsatz"></span>%; Arbeitgeber: <span
+        id="alvbeitragsatz_arbeitgeber"></span>%, Arbeitnehmer: <span id="alvbeitragsatz_arbeitnehmer"></span>%
+    </td>
+    <td><a href="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" target="_blank">SV-Beiträge 2012</a> (<a
+        href="public/data/gehaltsrechnerdaten.xml" target="_blank">XML</a>)
+    </td>
+  </tr>
+
+  <tr class="even">
+    <td>Pflegeversicherung (PV)</td>
+    <td class="number"><span id="pvbeitrag"></span> €</td>
+    <td class="number"><span id="pvbeitrag_arbeitgeber"></span> €</td>
+    <td class="number"><span id="pvbeitrag_arbeitnehmer"></span> €</td>
+    <td class="berechnung"><span id="pvbeitragsatz">1.95</span>%; Arbeitgeber: <span id="pvbeitragsatz_arbeitgeber">0.975</span>%,
+      Arbeitnehmer: <span id="pvbeitragsatz_arbeitnehmer">0.975</span>%
+    </td>
+    <td><a href="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" target="_blank">SV-Beiträge 2012</a> (<a
+        href="public/data/gehaltsrechnerdaten.xml" target="_blank">XML</a>)
+    </td>
+  </tr>
+
+  <tr>
+    <td>Lohnsteuer (LSt)</td>
+    <td class="number"><span id="lohnsteuerbeitrag"></span> €</td>
+    <td class="number"><span id="lohnsteuerbeitrag_arbeitgeber"></span> €</td>
+    <td class="number"><span id="lohnsteuerbeitrag_arbeitnehmer"></span> €</td>
+    <td class="berechnung"><input type="button" value="Neuberechnen" onclick="lohnsteuerberechnen()"> Nutzt <a
+        href="https://www.bmf-steuerrechner.de/interface/">dieses Interface</a></td>
+    <td><a href="https://www.bmf-steuerrechner.de/">bmf-steuerrechner</a></td>
+  </tr>
+
+  <tr>
+    <td>Kirchensteuer (KiSt)</td>
+    <td class="number"><span id="kirchensteuerbeitrag"></span> €</td>
+    <td class="number"><span id="kirchensteuerbeitrag_arbeitgeber"></span> €</td>
+    <td class="number"><span id="kirchensteuerbeitrag_arbeitnehmer"></span> €</td>
+    <td class="berechnung">Für <span id="wohnortbundesland"></span>: <span id="kirchensteuersatz"></span>% von der
+      Lohnsteuer
+    </td>
+    <td><a href="http://www.lohn-info.de/kirchensteuer.html" target="_blank">Kirchensteuersätze 2012</a> (<a
+        href="public/data/gehaltsrechnerdaten.xml" target="_blank">XML</a>)
+    </td>
+  </tr>
+
+  <tr class="even">
+    <td>Insolvenzgeldumlage (INSO)</td>
+    <td class="number"><span id="insolvenzbeitrag"></span> €</td>
+    <td class="number"><span id="insolvenzbeitrag_arbeitgeber"></span> €</td>
+    <td class="number"><span id="insolvenzbeitrag_arbeitnehmer"></span> €</td>
+    <td class="berechnung">Für 2012 ist es <span id="insolvenzbeitragsatz"></span>%. (<a
+        href="http://www.lohn-info.de/insolvenzgeldumlage.html">wird jedes Jahr geändert</a>).
+    </td>
+    <td><a href="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" target="_blank">SV-Beiträge 2012</a> (<a
+        href="public/data/gehaltsrechnerdaten.xml" target="_blank">XML</a>)
+    </td>
+  </tr>
+
+  <tr>
+    <td>Umlage U1</td>
+    <td class="number"><span id="umlageu1beitrag"></span> €</td>
+    <td class="number"><span id="umlageu1beitrag_arbeitgeber"></span> €</td>
+    <td class="number"><span id="umlageu1beitrag_arbeitnehmer"></span> €</td>
+    <td class="berechnung">Für <span class="krankenkasse_name"></span>:
+      <div id="krankenkasse_umlagesaetze_u111">
+        <input type="radio" id="umlagesatzU1CheckBox_1" name="umlagesatz_u1" checked="true"/><label
+          for="umlagesatz_u1_checkbox_1"><span id="umlagesatzU1Wert_1"></span> % (<span
+          id="umlagesatzU1Erstattung_1"></span> % Erstattung)</label><br/>
+        <input type="radio" id="umlagesatzU1CheckBox_2" name="umlagesatz_u1"/><label
+          for="umlagesatz_u1_checkbox_2"><span id="umlagesatzU1Wert_2"></span> % (<span
+          id="umlagesatzU1Erstattung_2"></span> % Erstattung)</label><br/>
+        <input type="radio" id="umlagesatzU1CheckBox_3" name="umlagesatz_u1"/><label
+          for="umlagesatz_u1_checkbox_3"><span id="umlagesatzU1Wert_3"></span> % (<span
+          id="umlagesatzU1Erstattung_3"></span> % Erstattung)</label><br/>
+
+        <div id="umlagesatzU1_Choice4"><input type="radio" id="umlagesatzU1CheckBox_4" name="umlagesatz_u1"/><label
+            for="umlagesatz_u1_checkbox_4"><span id="umlagesatzU1Wert_4"></span> % (<span
+            id="umlagesatzU1Erstattung_4"></span> % Erstattung)</label></div>
+      </div>
+    </td>
+    <td><a href="public/data/umlagesaetze.xml" target="_blank">Offene XML-Datei</a></td>
+  </tr>
+
+  <tr class="even">
+    <td>Umlage U2</td>
+    <td class="number"><span id="umlageu2beitrag"></span> €</td>
+    <td class="number"><span id="umlageu2beitrag_arbeitgeber"></span> €</td>
+    <td class="number"><span id="umlageu2beitrag_arbeitnehmer"></span> €</td>
+    <td class="berechnung">Für <span class="krankenkasse_name"></span>:
+      <div id="krankenkasse_umlagesaetze_u2"><span id='umlagesatzU2Wert'></span>% (<span
+          id='umlagesatzU2Erstattung'></span>% Erstattung)
+      </div>
+    </td>
+    <td><a href="public/data/umlagesaetze.xml" target="_blank">Offene XML-Datei</a></td>
+  </tr>
+
+</table>
+
+<div style="text-align: center">
+  <div class="parteieninfos">
+    <h3>Nettogehalt des Arbeitnehmers:</h3>
+
+    <div style="padding-bottom:8px;"><span id="nettogehalt_arbeitnehmer" class="round"></span> € =</div>
+    <div id="nettogehalt_berechnung"><span id="netto_bruttogehalt"></span>(Brutto) - <span
+        id="netto_kvbeitrag_arbeitnehmer"></span>(KV) - <span id="netto_rvbeitrag_arbeitnehmer"></span>(RV) - <span
+        id="netto_alvbeitrag_arbeitnehmer"></span>(ALV) - <span id="netto_pvbeitrag_arbeitnehmer"></span>(PV) - <span
+        id="netto_lohnsteuerbeitrag_arbeitnehmer"></span>(LSt) - <span
+        id="netto_kirchensteuerbeitrag_arbeitnehmer"></span>(KiSt)
+    </div>
+  </div>
+
+  <div class="parteieninfos">
+    <h3>Der Arbeitgeber zahlt:</h3>
+    <table id="arbeitgebertabelle" class="bordered">
+      <tr class="round">
+        <th>Zahlungsempfänger</th>
+        <th>Was</th>
+        <th style="min-width: 120px;">Beitrag</th>
+        <th>Beitragsberechnung</th>
+        <th>Wie</th>
+      </tr>
+      <tr>
+        <td>Arbeitnehmer</td>
+        <td>Nettogehalt</td>
+        <td class="number"><span id="nettogehalt_ag"></span> €</td>
+        <td>Siehe oben</td>
+        <td>Überweisung</td>
+      </tr>
+      <tr>
+        <td>Krankenkasse (KK)</td>
+        <td>Sozialversicherungen</td>
+        <td class="number"><span id="sozialversicherungenbeitrag_ag"></span> €</td>
+        <td><span id="kvbeitrag_svag"></span>(KV) + <span id="rvbeitrag_svag"></span>(RV) + <span
+            id="alvbeitrag_svag"></span>(ALV) + <span id="pvbeitrag_svag"></span>(PV) + <span
+            id="insolvenzbeitrag_svag"></span>(INSO) + <span id="umlageu1beitrag_svag"></span>(U1) + <span
+            id="umlageu2beitrag_svag"></span>(U2)
+        </td>
+        <td>1) Alle Sozialversicherungen über <a href="http://wiki.opensourceecology.de/wiki/Sv.net" target="_blank">sv.net
+          anmelden</a> und<br/>2) das Geld an der KK überweisen
+        </td>
+      </tr>
+      <tr>
+        <td>Finanzamt</td>
+        <td>Lohnsteuer</td>
+        <td class="number"><span id="lohnsteuerbeitrag_ag">0</span> €</td>
+        <td>Siehe die obere Tabelle</td>
+        <td><a href="http://www.elster.de" target="_blank">http://www.elster.de</a></td>
+      </tr>
+      <tr>
+        <td>Finanzamt</td>
+        <td>Kirchensteuer</td>
+        <td class="number"><span id="kirchensteuerbeitrag_ag">0</span> €</td>
+        <td>Siehe die obere Tabelle</td>
+        <td><a href="http://www.elster.de" target="_blank">http://www.elster.de</a></td>
+      </tr>
+      <tr>
+        <td>VBG (Verwaltungs-Berufsgenossenschaft)</td>
+        <td>Unfallversicherung</td>
+        <td class="number"><span id="unfallversicherung_ag"></span> €</td>
+        <td>Noch zu erfahren</td>
+        <td>1) Unternehmen in <a
+            href="http://www.vbg.de/DE/Service_at_VBG/Unternehmensanmeldung/unternehmen/unternehmen_node.html"
+            target="_blank">vbg.de anmelden</a> (<a
+            href="https://www.vbg.de/lip/resources/071A539ED285714A5740/form/MUB002i.pdf?%24returnTo=https%3A%2F%2Fwww.vbg.de%2Flip%2Fform%2Fdisplay.do%3F%2524context%3D071A539ED285714A5740&%24context=071A539ED285714A5740"
+            target="_blank">Infos</a>)<br/>2) Papiere per Post erhalten<br/>3) TODO ...
+        </td>
+      </tr>
+    </table>
+    Insgesamt: <span id="gesamtkosten_ag"></span> €.
+  </div>
+
+  <span id="umlageu1beitragxxx" class="hidden">0</span>
+  <span id="umlageu1beitragyyy" class="hidden">0</span>
+  <span id="umlageu1beitragzzz" class="hidden">0</span>
+  <span id="umlageu1beitragwww" class="hidden">0</span>
+
+  <span id="textoutput"></span>
+</div>
+
+
+<div id="footer">
+  Dieses Open Souce Gehaltsrechner wird Ihnen gemeinfrei gegeben durch: <br/>
+  <a href="http://wiki.opensourceecology.de"><img src="http://wiki.opensourceecology.de/skins/common/images/wiki.png"
+                                                  title="Open Source Ecology Germany"/></a>
+  <a href="http://www.velaia.de"><img src="http://wiki.opensourceecology.de/images/a/a9/Velaia_logo.png"
+                                      title="velaia GmbH"/></a><br/>
+  <span style="padding-right: 30px;">See the source at</span> <a
+    href="https://github.com/ngeorgiev/Open-Source-Gehaltsrechner"><img
+    src="https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x.png?1340659530"/></a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<gehaltsrechnerdaten>
+
+<sozialversicherungsbeitraege jahr="2015">
+	<krankenversicherung>
+		<beitragsatz gesamt="15.5" arbeitgeber="7.3" arbeitnehmer="8.2"/>
+		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2015.html" />
+	</krankenversicherung>
+	<rentenversicherung>
+		<beitragsatz gesamt="18.7" arbeitgeber="9.35" arbeitnehmer="9.35"/>
+		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2015.html" />
+	</rentenversicherung>
+	<arbeitslosenversicherung>
+		<beitragsatz gesamt="3" arbeitgeber="1.5" arbeitnehmer="1.5"/>
+		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2015.html" />
+	</arbeitslosenversicherung>
+	<pflegeversicherung>
+		<beitragsatz kinderlos="0" gesamt="2.35" arbeitgeber="1.175" arbeitnehmer="1.175"/>
+		<beitragsatz kinderlos="1" gesamt="2.6" arbeitgeber="1.175" arbeitnehmer="1.425"/>
+		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2015.html" />
+	</pflegeversicherung>
+</sozialversicherungsbeitraege>
+
+<umlagen>
+	<insolvenzgeldumlage jahr="2012" beitragsatz="0.15" />
+	<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" />
+</umlagen>
+
+<steuer>
+	<kirchensteuer jahr="2012">
+		<bundesland id="bw"><kirchensteuersatz>8</kirchensteuersatz></bundesland>
+		<bundesland id="by"><kirchensteuersatz>8</kirchensteuersatz></bundesland>
+		<bundesland id="be"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
+		<bundesland id="bb"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
+		<bundesland id="hb"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
+		<bundesland id="hh"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
+		<bundesland id="he"><kirchensteuersatz>9</kirchensteuersatz><mindestkirchensteuer>1.80</mindestkirchensteuer></bundesland>
+		<bundesland id="mv"><kirchensteuersatz>9</kirchensteuersatz><mindestkirchensteuer hinweise="Wird nur in den Erzbistümern Hamburg und Berlin im Bundesland Mecklenburg-Vorpommern erhoben">3.80</mindestkirchensteuer></bundesland>
+		<bundesland id="ni"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
+		<bundesland id="nw"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
+		<bundesland id="rp"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
+		<bundesland id="sl"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
+		<bundesland id="sn"><kirchensteuersatz>9</kirchensteuersatz><mindestkirchensteuer hinweise="Die Mindestkirchensteuer wird nur von der evangelischen Kirche erhoben.">3.60</mindestkirchensteuer></bundesland>
+		<bundesland id="st"><kirchensteuersatz>9</kirchensteuersatz><mindestkirchensteuer hinweise="Die Mindestkirchensteuer wird nur von der evangelischen Kirche erhoben.">3.60</mindestkirchensteuer></bundesland>
+		<bundesland id="sh"><kirchensteuersatz>9</kirchensteuersatz><mindestkirchensteuer hinweise="Die Mindestkirchensteuer wird nur von der evangelischen Kirche erhoben.">3.60</mindestkirchensteuer></bundesland>
+		<bundesland id="th"><kirchensteuersatz>9</kirchensteuersatz><mindestkirchensteuer hinweise="Die Mindestkirchensteuer wird nur von der evangelischen Kirche erhoben.">3.60</mindestkirchensteuer></bundesland>
+		<quelle url="http://www.lohn-info.de/kirchensteuer.html" />
+	</kirchensteuer>
+</steuer>
+
+<bundeslaender>
+	<bundesland id="bw" name="Baden-Württemberg" />
+	<bundesland id="by" name="Bayern" />
+	<bundesland id="be" name="Berlin" />
+	<bundesland id="bb" name="Brandenburg" />
+	<bundesland id="hb" name="Bremen" />
+	<bundesland id="hh" name="Hamburg" />
+	<bundesland id="he" name="Hessen" />
+	<bundesland id="mv" name="Mecklenburg-Vorpommern" />
+	<bundesland id="ni" name="Niedersachsen" />
+	<bundesland id="nw" name="Nordrhein-Westfalen" />
+	<bundesland id="rp" name="Rheinland-Pfalz" />
+	<bundesland id="sl" name="Saarland" />
+	<bundesland id="sn" name="Sachsen" />
+	<bundesland id="st" name="Sachsen-Anhalt" />
+	<bundesland id="sh" name="Schleswig-Holstein" />
+	<bundesland id="th" name="Thüringen" />
+</bundeslaender>
+
+</gehaltsrechnerdaten>
