@@ -296,7 +296,7 @@ slikcalc.gehaltsrechner = {
 	// ---------------- Netto-Gehalt-Arbeitnehmer ---------------------
 	setupANNettoFormulaCalc : function() {
 		this.ANNettoFormulaCalc = slikcalc.create('formula', {
-			formula: '{a} - {b} - {c} - {d} - {e} - {f} - {g} = {n}',
+			formula: '{a} - {b} - {c} - {d} - {e} - {f} - {g} - {h} = {n}',
 			calcOnLoad: true,
             registerListeners: true,
 			vars: {
@@ -306,7 +306,8 @@ slikcalc.gehaltsrechner = {
 				d: { id: 'netto_alvbeitrag_arbeitnehmer'},
 				e: { id: 'netto_pvbeitrag_arbeitnehmer'},
 				f: { id: 'netto_lohnsteuerbeitrag_arbeitnehmer'},
-				g: { id: 'netto_kirchensteuerbeitrag_arbeitnehmer'},
+				g: { id: 'netto_solibeitrag_arbeitnehmer'},
+				h: { id: 'netto_kirchensteuerbeitrag_arbeitnehmer'},
 				n: { id: 'nettogehalt_arbeitnehmer'}
 			}
 		});

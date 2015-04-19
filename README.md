@@ -5,8 +5,7 @@ Open Source Gehaltsrechner
 
 * source for every calculation
 
-IMPORTANT: The source code is from 2012 and does not represent AT ALL the current best practices of Frontend Development!!!
-
+IMPORTANT (Source): The source code is from 2012 and does not represent AT ALL the current best practices of Frontend Development!!!
 
 ULR Parameters
 ==============

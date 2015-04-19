@@ -101,6 +101,12 @@ function addBindings() {
 	$('#lohnsteuerbeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
 		$('#netto_lohnsteuerbeitrag_arbeitnehmer').text($('#lohnsteuerbeitrag_arbeitnehmer').text());
 	});
+	$('#solibeitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
+		$('#solibeitrag_arbeitnehmer').text($('#solibeitrag').text());
+	});
+	$('#solibeitrag_arbeitnehmer').bind('DOMSubtreeModified', function(event) { // mirror the value
+		$('#netto_solibeitrag_arbeitnehmer').text($('#solibeitrag_arbeitnehmer').text());
+	});
 	$('#kirchensteuerbeitrag').bind('DOMSubtreeModified', function(event) { // mirror the value
 		var kirchensteuerbeitrag = $('#kirchensteuerbeitrag').text();
 		$('#kirchensteuerbeitrag_arbeitnehmer').text(kirchensteuerbeitrag);
@@ -186,7 +192,11 @@ function lohnsteuerberechnen() {
 		data: "RE4=" + bruttogehaltvalue,
 		dataType: "text",
 		success: function(data){
-			$('#lohnsteuerbeitrag').text(data);
+      var results = data.split(';');
+      var lohnsteuerResult = results[0];
+      var soliResult = results[1];
+			$('#lohnsteuerbeitrag').text(lohnsteuerResult);
+			$('#solibeitrag').text(soliResult);
 			var selectedWohnortBundesland = $('#wohnort').find(":selected");
 			var bundesLandId = selectedWohnortBundesland.val();
 			updateKirchensteuerdaten(bundesLandId);
