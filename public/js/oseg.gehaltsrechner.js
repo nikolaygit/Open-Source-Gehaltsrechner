@@ -182,7 +182,7 @@ function lohnsteuerberechnen() {
 	var bruttogehaltvalue = document.getElementById("bruttogehalt").value;			
 	$.ajax({
 		type: "GET",
-		url: "lohnsteuer.php",
+		url: "http://nikolay-georgiev.net/tools/money/lohnsteuer/2015.php",
 		data: "RE4=" + bruttogehaltvalue,
 		dataType: "text",
 		success: function(data){

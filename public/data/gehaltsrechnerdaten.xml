@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <gehaltsrechnerdaten>
 
-<sozialversicherungsbeitraege jahr="2012">
+<sozialversicherungsbeitraege jahr="2015">
 	<krankenversicherung>
 		<beitragsatz gesamt="15.5" arbeitgeber="7.3" arbeitnehmer="8.2"/>
-		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" />
+		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2015.html" />
 	</krankenversicherung>
 	<rentenversicherung>
-		<beitragsatz gesamt="19.6" arbeitgeber="9.8" arbeitnehmer="9.8"/>
-		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" />
+		<beitragsatz gesamt="18.7" arbeitgeber="9.35" arbeitnehmer="9.35"/>
+		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2015.html" />
 	</rentenversicherung>
 	<arbeitslosenversicherung>
 		<beitragsatz gesamt="3" arbeitgeber="1.5" arbeitnehmer="1.5"/>
-		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" />
+		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2015.html" />
 	</arbeitslosenversicherung>
 	<pflegeversicherung>
-		<beitragsatz kinderlos="0" gesamt="1.95" arbeitgeber="0.975" arbeitnehmer="0.975"/>
-		<beitragsatz kinderlos="1" gesamt="2.2" arbeitgeber="0.975" arbeitnehmer="1.225"/>
-		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" />
+		<beitragsatz kinderlos="0" gesamt="2.35" arbeitgeber="1.175" arbeitnehmer="1.175"/>
+		<beitragsatz kinderlos="1" gesamt="2.6" arbeitgeber="1.175" arbeitnehmer="1.425"/>
+		<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2015.html" />
 	</pflegeversicherung>
 </sozialversicherungsbeitraege>
 
 <umlagen>
-	<insolvenzgeldumlage jahr="2012" beitragsatz="0.04" />
+	<insolvenzgeldumlage jahr="2012" beitragsatz="0.15" />
 	<quelle url="http://www.lohn-info.de/sozialversicherungsbeitraege2012.html" />
 </umlagen>
 
@@ -33,9 +33,9 @@
 		<bundesland id="be"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
 		<bundesland id="bb"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
 		<bundesland id="hb"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
-		<bundesland id="hh"><kirchensteuersatz>9</kirchensteuersatz><mindestkirchensteuer>3.60</mindestkirchensteuer></bundesland>
+		<bundesland id="hh"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
 		<bundesland id="he"><kirchensteuersatz>9</kirchensteuersatz><mindestkirchensteuer>1.80</mindestkirchensteuer></bundesland>
-		<bundesland id="mv"><kirchensteuersatz>9</kirchensteuersatz><mindestkirchensteuer hinweise="Wird nur in den Erzbistümern Hamburg und Berlin im Bundesland Mecklenburg-Vorpommern erhoben">1.80</mindestkirchensteuer></bundesland>
+		<bundesland id="mv"><kirchensteuersatz>9</kirchensteuersatz><mindestkirchensteuer hinweise="Wird nur in den Erzbistümern Hamburg und Berlin im Bundesland Mecklenburg-Vorpommern erhoben">3.80</mindestkirchensteuer></bundesland>
 		<bundesland id="ni"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
 		<bundesland id="nw"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
 		<bundesland id="rp"><kirchensteuersatz>9</kirchensteuersatz></bundesland>
