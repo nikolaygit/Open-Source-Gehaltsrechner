@@ -7,11 +7,6 @@ Open Source Gehaltsrechner
 
 IMPORTANT (Source): The source code is from 2012 and does not represent AT ALL the current best practices of Frontend Development!!!
 
-IMPORTANT (Data):
-
-* Solidaritätszuschlag fehlt.
-* Der Arbeitgeber ist verpflichtet, den Solidaritätszuschlag vom Arbeitslohn einzubehalten und an das Finanzamt abzuführen(Source: [lohn-info.de](http://www.lohn-info.de/solizuschlag.html)).
-
 ULR Parameters
 ==============
 You can share the calculation of the salary of a person, just by sending him a link with the appropriate parameters.
