@@ -3,7 +3,6 @@ header('Access-Control-Allow-Origin: http://github.io');
 header('Access-Control-Allow-Origin: http://nikolayhg.github.io');
 header('Access-Control-Allow-Origin: http://nikolay-georgiev.net');
 header('Access-Control-Allow-Origin: http://opensourceecology.de');
-header('Access-Control-Allow-Origin: *');
 
 // Implementation of this interface https://www.bmf-steuerrechner.de/interface/
 
